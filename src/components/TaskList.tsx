@@ -1,19 +1,23 @@
 import React from 'react'
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, Text, TouchableOpacity, FlatList } from 'react-native'
 
 
 type TasksProps = {
+  id : string
   title: string
 }
 interface propTypes {
   tasks: TasksProps[] | undefined
 }
 
-export const TaskList = (props: propTypes) => {
+export const TaskList = ({tasks}: propTypes) => {
   return (
     <View>
-      {props.tasks && props.tasks.map((item, index) =>
-        <View style={styles.task} key={index}>
+      <FlatList 
+      data={tasks}
+      keyExtractor={(item)=> item.id}
+      renderItem={({item}) =>
+        <View style={styles.task}>
           <Text style={styles.taskText}>
             {item.title}
           </Text>
@@ -23,7 +27,10 @@ export const TaskList = (props: propTypes) => {
               🗑️
             </Text>
           </TouchableOpacity>
-        </View>)}
+        </View>}
+      >
+      
+      </FlatList>
     </View>
   )
 }

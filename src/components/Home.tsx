@@ -1,28 +1,17 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native'
 import { TaskList } from './TaskList'
+import { addTask, tasks } from '../context/tasksContext'
 
 export const Home: React.FC = () => {
 
   interface TasksInterface {
+    id : string
     title: string
   }
 
-  const [tasks, setTasks] = useState<TasksInterface[]>()
   const [inputValue, setInputValue] = useState<string>()
   const [error, setError] = useState<string>()
-
-  const addTask = (input: string) =>{
-    const newTask = {
-      title: input
-    }
-    setTasks((prev): TasksInterface[] => {
-      if (prev) {
-        return [...prev, newTask]
-      }
-      return [newTask]
-    })
-  }
 
   const onClick = (input: string | any) => {
     addTask(input)
@@ -42,9 +31,6 @@ export const Home: React.FC = () => {
       <TouchableOpacity onPress={() => inputValue ? onClick(inputValue) : setError('Task empty')} style={styles.button} activeOpacity={0.85}>
         <Text style={styles.textButton}>Adicionar</Text>
       </TouchableOpacity>
-      {/* <TouchableOpacity onPress={() => setTasks(undefined)} style={styles.button} activeOpacity={0.85}>
-        <Text style={styles.textButton}>Deletar</Text>
-      </TouchableOpacity> */}
 
       <View  style={styles.taskContainer}>
         <Text style={styles.title}>My Tasks</Text>

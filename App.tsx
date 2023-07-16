@@ -1,14 +1,17 @@
 import { StyleSheet, SafeAreaView} from 'react-native';
 import { Home } from './src/components/Home';
 import { StatusBar } from 'expo-status-bar';
+import { TaskProvider } from './src/context/tasksContext';
 
 export default function App() {
 
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <Home/>
-      <StatusBar style="light" />
-    </SafeAreaView>
+    <TaskProvider>
+      <SafeAreaView style={styles.safeArea}>
+        <Home/>
+        <StatusBar style="light" />
+      </SafeAreaView>
+    </TaskProvider>
   );
 }
 
